@@ -32,6 +32,20 @@ type Query {
     listProducts(category: String, limit: Int): [Product!]!
 }
 
+type Mutation {
+    addProduct(input: ProductInput!): Product!
+    editProduct(id: ID!, input: ProductInput!): Product!
+    deleteProduct(id: ID!): Boolean!
+}
+
+input ProductInput {
+    name: String!
+    price: Float!
+    description: String
+    category: String!
+    stock: Int!
+}
+
 input OrderItemInput {
     productId: ID!
     quantity: Int!

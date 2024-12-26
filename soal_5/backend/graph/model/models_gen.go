@@ -2,6 +2,9 @@
 
 package model
 
+type Mutation struct {
+}
+
 type Order struct {
 	ID        string       `json:"id"`
 	User      *User        `json:"user"`
@@ -27,6 +30,14 @@ type Product struct {
 	Description *string `json:"description,omitempty"`
 	Category    *string `json:"category,omitempty"`
 	Stock       *int32  `json:"stock,omitempty"`
+}
+
+type ProductInput struct {
+	Name        string  `json:"name"`
+	Price       float64 `json:"price"`
+	Description *string `json:"description,omitempty"`
+	Category    string  `json:"category"`
+	Stock       int32   `json:"stock"`
 }
 
 type Query struct {

@@ -10,6 +10,39 @@ import (
 	"github.com/qraphql-services/graph/model"
 )
 
+// AddProduct is the resolver for the addProduct field.
+func (r *mutationResolver) AddProduct(ctx context.Context, input model.ProductInput) (*model.Product, error) {
+	product, err := r.Resolver.AddProduct(ctx, input)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return product, nil
+}
+
+// EditProduct is the resolver for the editProduct field.
+func (r *mutationResolver) EditProduct(ctx context.Context, id string, input model.ProductInput) (*model.Product, error) {
+	product, err := r.Resolver.EditProduct(ctx, id, input)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return product, nil
+}
+
+// DeleteProduct is the resolver for the deleteProduct field.
+func (r *mutationResolver) DeleteProduct(ctx context.Context, id string) (bool, error) {
+	product, err := r.Resolver.DeleteProduct(ctx, id)
+
+	if err != nil {
+		return false, err
+	}
+
+	return product, nil
+}
+
 // GetProduct is the resolver for the getProduct field.
 func (r *queryResolver) GetProduct(ctx context.Context, id string) (*model.Product, error) {
 	product, err := r.Resolver.GetProduct(ctx, string(id))
@@ -36,7 +69,11 @@ func (r *queryResolver) ListProducts(ctx context.Context, category *string, limi
 	return products, nil
 }
 
+// Mutation returns MutationResolver implementation.
+func (r *Resolver) Mutation() MutationResolver { return &mutationResolver{r} }
+
 // Query returns QueryResolver implementation.
 func (r *Resolver) Query() QueryResolver { return &queryResolver{r} }
 
+type mutationResolver struct{ *Resolver }
 type queryResolver struct{ *Resolver }
