@@ -1,0 +1,38 @@
+type Product {
+    id: ID!
+    name: String!
+    price: Float!
+    description: String
+    category: String
+    stock: Int
+}
+
+type User {
+    id: ID!
+    name: String!
+    email: String!
+    address: String
+}
+
+type Order {
+    id: ID!
+    user: User!
+    orderDate: String!
+    status: String!
+    items: [OrderItem!]!
+}
+
+type OrderItem {
+    product: Product!
+    quantity: Int!
+}
+
+type Query {
+    getProduct(id: ID!): Product
+    listProducts(category: String, limit: Int): [Product!]!
+}
+
+input OrderItemInput {
+    productId: ID!
+    quantity: Int!
+}
